@@ -1,0 +1,9 @@
+# Open an elevated Command Prompt (Run as Administrator)
+
+diskpart
+list volume             # find the volume with WINRETOOLS or the unwanted drive letter
+select volume <number>  # replace <number> with that volume’s number
+remove letter=F         # replace F with the current drive letter
+exit
+
+# This removes only the drive letter; it does not delete the partition.

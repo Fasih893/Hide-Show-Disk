@@ -1,0 +1,9 @@
+# If you later want to show the partition again, run:
+
+diskpart
+list volume
+select volume <number>
+assign letter=F         # choose any free letter you want
+exit
+
+# This way you keep the recovery partition intact while controlling whether it appears in File Explorer.

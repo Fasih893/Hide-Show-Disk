@@ -1,0 +1,108 @@
+If you’re seeing an extra drive/partition “F: WINRETOOLS” showing up in This PC.
+
+---------------------------------------------------------------------
+
+What WINRETOOLS is?
+
+WINRETOOLS is a hidden recovery partition created by your laptop’s manufacturer (Dell, HP, Lenovo, etc.). It contains Windows Recovery Environment (WinRE) and sometimes factory tools or drivers used for:
+i.   Repairing Windows if it won’t boot
+ii.  Resetting or reinstalling Windows to factory defaults
+iii. Running built-in diagnostic utilities
+iv.  Normally it’s hidden and doesn’t get a drive letter. 
+After an update or disk change, Windows sometimes assigns it a letter (like F:), so it suddenly appears.
+
+---------------------------------------------------------------------
+
+How to hide WINRETOOLS using Command Prompt
+
+1. Open an elevated Command Prompt
+
+	Press Win + S, type cmd
+
+	Right-click Command Prompt → Run as administrator
+
+2. Start DiskPart
+	
+	diskpart
+
+3. List all volumes
+
+	list volume
+	
+	You’ll see a table of all volumes.
+	Find the one with F under the Ltr column. That’s your WINRETOOLS partition.
+	Note its volume number (e.g., Volume 5).
+
+4. Select that volume
+
+	select volume <number>
+	Replace <number> with the volume number you noted.
+	
+	Example:
+
+	select volume 5
+
+5. Remove its drive letter
+
+	remove letter=F
+
+
+6. Exit DiskPart
+
+	exit
+
+
+Now check This PC — the “F: WINRETOOLS” should be gone, but the partition still exists for recovery.
+
+---------------------------------------------------------------------
+
+Once you’ve removed the drive letter, the partition still exists but it’s “hidden.” You can make it show again simply by assigning a drive letter back.
+
+Show the hidden WINRETOOLS again
+
+1. Open an elevated Command Prompt
+
+	Press Win + S, type cmd
+
+	Right-click Command Prompt → Run as administrator
+
+2. Start DiskPart
+
+	diskpart
+
+
+3. List all volumes
+
+	list volume
+
+
+	You’ll see all the volumes.
+
+	The WINRETOOLS partition will now have no letter but will still be listed as “Recovery” or “OEM” with its size.
+
+4. Select the volume
+
+	select volume <number>
+
+	Replace <number> with the volume number of the recovery partition (the one that had F: before).
+	
+	Example:
+
+		select volume 5
+
+
+5. Assign a drive letter
+
+	assign letter=F
+
+
+	(You can choose any free letter, e.g. F, G, H…)
+
+6. Exit DiskPart
+
+	exit
+
+
+Now open This PC — the WINRETOOLS partition will be visible again under the letter you assigned.
+
+---------------------------------------------------------------------
